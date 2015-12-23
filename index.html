@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<!--PC端访问优先使用IE最新版本和Chrome-->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui" />
+	<meta name="apple-mobile-web-app-title" content="党员E家" />
+	<!--添加到主屏后的标题-->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!--WebApp全屏模式-->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<!--设置状态栏颜色,content的值为default | black | black-translucent-->
+	<meta content="telephone=no" name="format-detection" />
+	<!--忽略数字自动识别为电话号码-->
+	<meta name="renderer" content="webkit" />
+	<!--优先采用webkit内核渲染-->
+	<meta name="keywords" content=" " />
+	<meta name="description" content="" />
+	<title>可配置人员组件</title>
+	<link data-th-href="|${tempPath}style/font-awesome.min.css|" href="style/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link data-th-href="|${tempPath}style/themes.less|"  href="style/themes.less" rel="stylesheet" type="text/less" />
+	<link data-th-href="|${tempPath}datatables-extend/css/dataTables.response.less|"  href="datatables-extend/css/dataTables.response.less" rel="stylesheet" type="text/less" />
+	<link data-th-href="|${tempPath}style/layout.css|"  href="style/layout.css" rel="stylesheet" type="text/css" />
+	<link data-th-href="|${tempPath}style/master.css|"  href="style/master.css" rel="stylesheet" type="text/css" />
+	<!--人员选择插件CSS文件-->
+	<link data-th-href="|${tempPath}style/peopleselect.less|"  href="style/peopleselect.less" rel="stylesheet" type="text/less" />
+	<script data-th-src="|${tempPath}javascript/less-1.7.3.min.js|" src="javascript/less-1.7.3.min.js"></script>
+	<script data-th-src="|${tempPath}javascript/modernizr.js|" src="javascript/modernizr.js"></script>
+	<script data-th-inline="javascript">
+	Cfg = {};
+	Cfg.contextPath = /*[[ ${#httpServletRequest.getContextPath()} ]]*/ '/emall';
+	Cfg.tempPath = /*[[ ${tempPath} ]]*/ '/emall/tpl/001/';
+	</script>
+	</head>
+	<body>
+    <div id="layout">
+      <div class="wrapper" id="frame_wrapper">
+        <div class="off-canvas-wrap" data-offcanvas="" id="frame_canvas_wrap">
+          <div class="inner-wrap" id="frame_inner_wrap">
+            <div class="left-off-canvas-menu hide-for-large" id="frame_canvas_menu" data-set="data_accordion"></div>
+            <div class="header" id="frame_header" include="include.html">
+              <div id="frame_top_banner" class="top_banner clearfix">
+                <div id="frame_logo_sub" class="logo"></div>
+                <div id="frame_top_bar">
+                  <nav class="top-bar" data-topbar="" role="navigation" id="data_top_bar">
+                    <ul class="title-area">
+                      <li class="canvas-toggle"><a class="left-off-canvas-toggle" href="#" ></a></li>
+                      <li class="name">
+                        <h1>党员e家</h1>
+                      </li>
+                      <li class="toggle-topbar"><a href="#"><i class="fa fa-ellipsis-h fa-2x"></i></a></li>
+                    </ul>
+                    <section class="top-bar-section hide-for-small clearfix" data-set="top_bar_section">
+                      <ul class="left top-bar-section-li clearfix">
+                        <li><a href="javascript:;">首页</a></li>
+                        <li><a href="javascript:;">我的支部</a></li>
+                        <li><a href="javascript:;">我的办事</a></li>
+                        <li><a href="javascript:;">我的学习</a></li>
+                        <li><a href="javascript:;">我的论坛</a></li>
+                      </ul>
+                    </section>
+                    <div class="hide-for-large" data-set="user-bar"></div>
+                  </nav>
+                </div>
+                <div id="frame_user_bar_main" class="hide-for-small clearfix right" data-set="user-bar">
+                  <div class="user-bar">
+                    <div class="user-bar-head"> <a title="党员e家"><img src="images/user-head-logo.png" data-th-src="|${tempPath}images/user-head-logo.png|" /></a> </div>
+                    <div class="drop-bar" id="drop-bar1">
+                      <div class="drop-bar-tit"><i class="fa fa-gear fa-fw fa-2x"></i></div>
+                      <div class="drop-bar-con user-inter">
+                        <ul>
+                          <li><a href="#" title="账户管理"><i class="fa fa-gear"></i>账户管理</a></li>
+                          <li><a href="#" title="退出"><i class="fa fa-power-off"></i>退出</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="drop-bar" id="drop-bar2">
+                      <div class="drop-bar-tit drop-message"> <i class="fa fa-comment-o fa-2x"></i><i class="fa fa-circle badge alert"><span>8</span></i> </div>
+                      <div class="drop-bar-con mini-new">
+                        <div class="mini-new-hd"> <strong> 最新的消息： </strong> </div>
+                        <ul class="mini-new-bd">
+                          <li>
+                            <div class="mini-new-img"> <a target="_top" href="#"> <img src="images/new1.png" data-th-src="|${tempPath}images/new1.png|" alt="党员e家" /> </a> </div>
+                            <div class="mini-new-count"> <span>2015-7-8 15:34:50</span> </div>
+                            <div class="mini-new-title"> <a target="_top" href="#" title="党员e家">党员e家</a> </div>
+                            <div class="mini-new-del"> <a href="#" title="删除"><i class="fa fa-trash"></i></a> </div>
+                            <div class="mini-new-info"> <a href="#" title="党员e家组织的此次党性教育，督促我要始终保持党的先进性，不断的提高自己，发挥党员应有的先锋模范作用" >“党员e家”组织的此次党性教育，督促我要始终保持党的先进性，不断的提高自己，发挥党员应有的先锋模范作用</a> </div>
+                          </li>
+                          <li>
+                            <div class="mini-new-img"> <a target="_top" href="#"> <img src="images/new1.png" data-th-src="|${tempPath}images/new1.png|" alt="党员e家" /> </a> </div>
+                            <div class="mini-new-count"> <span>2015-7-8 15:34:50</span> </div>
+                            <div class="mini-new-title"> <a target="_top" href="#" title="党员e家">党员e家</a> </div>
+                            <div class="mini-new-del"> <a href="#" title="删除"><i class="fa fa-trash"></i></a> </div>
+                            <div class="mini-new-info"> <a title="党员e家党员e家党员e家党员e家党员e家党员e家党员e家党员e家" >党员e家党员e家党员e家党员e家党员e家党员e家党员e家党员e家</a> </div>
+                          </li>
+                          <li>
+                            <div class="mini-new-img"> <a target="_top" href="#"> <img src="images/new3.png" data-th-src="|${tempPath}images/new3.png|" alt="党员e家" /> </a> </div>
+                            <div class="mini-new-count"> <span>2015-7-8 15:34:50</span> </div>
+                            <div class="mini-new-title"> <a target="_top" href="#" title="党员e家">党员e家</a> </div>
+                            <div class="mini-new-del"> <a href="#" title="删除"><i class="fa fa-trash"></i></a> </div>
+                            <div class="mini-new-info"> <a title="党员e家党员e家党员e家党员e家党员e家党员e家党员e家党员e家" >党员e家党员e家党员e家党员e家党员e家党员e家党员e家党员e家</a> </div>
+                          </li>
+                          <li>
+                            <div class="mini-new-img"> <a target="_top" href="#"> <img src="images/new1.png" data-th-src="|${tempPath}images/new1.png|" alt="党员e家" /> </a> </div>
+                            <div class="mini-new-count"> <span>2015-7-8 15:34:50</span> </div>
+                            <div class="mini-new-title"> <a target="_top" href="#" title="党员e家">党员e家</a> </div>
+                            <div class="mini-new-del"> <a href="#" title="删除"><i class="fa fa-trash"></i></a> </div>
+                            <div class="mini-new-info"> <a title="党员e家组织的此次党性教育，督促我要始终保持党的先进性，不断的提高自己，发挥党员应有的先锋模范作用" >“党员e家”组织的此次党性教育，督促我要始终保持党的先进性，不断的提高自己，发挥党员应有的先锋模范作用</a> </div>
+                          </li>
+                          <li>
+                            <div class="mini-new-img"> <a target="_top" href="#"> <img src="images/new1.png" data-th-src="|${tempPath}images/new1.png|" alt="党员e家" /> </a> </div>
+                            <div class="mini-new-count"> <span>2015-7-8 15:34:50</span> </div>
+                            <div class="mini-new-title"> <a target="_top" href="#" title="党员e家">党员e家</a> </div>
+                            <div class="mini-new-del"> <a href="#" title="删除"><i class="fa fa-trash"></i></a> </div>
+                            <div class="mini-new-info"> <a title="党员e家党员e家党员e家党员e家党员e家党员e家党员e家党员e家" >党员e家党员e家党员e家党员e家党员e家党员e家党员e家党员e家</a> </div>
+                          </li>
+                        </ul>
+                        <div class="mini-new-ft">
+                          <p class="left"> <strong> 您还有15条消息 </strong> </p>
+                          <p class="right"> <a target="_top" href="#" class="button tiny">查看我的消息</a> </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="frame_top_search">
+                  <div id="data_search" class="hide-for-small clearfix right" data-set="top_search">
+                    <div class="top_search">
+                      <form target="_blank">
+                        <input type="text" placeholder="请输入关键词" />
+                        <i class="fa fa-search fa-2x index-search"></i>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end header-->
+            
+            <div class="main" role="main" aria-label="主体区块" id="frame_main">
+              <div class="rj-row" id="frame_main_row1" data-equalizer="">
+                <div class="small-24 medium-24 large-5 columns hide-for-small" id="frame_main_col1" data-equalizer-watch="">
+                  <div id="frame_accordion" class="height-100" include="include.html">
+                    <div id="data_accordion" class="padding-t height-100 hide-for-small" data-set="data_accordion">
+                      <div class="accordion-list">
+                        <div class="accordion-banner">
+                          <div class="font-large accordion-header-small"><a class="accordion-banner-logo margin-r"></a>党员e家<i class="fa fa-caret-down margin-l"></i></div>
+                          <section class="top-bar-section clearfix">
+                            <div class="hide-for-large" data-set="top_bar_section"></div>
+                          </section>
+                          <div class="top-bar-search clearfix">
+                            <div class="hide-for-large" data-set="top_search"></div>
+                          </div>
+                        </div>
+                        <div class="accordion-header">
+                          <div class="accordion-header-logo"> <a title="陈某某"><img src="images/user-head-logo.png" data-th-src="|${tempPath}images/user-head-logo.png|" /></a> </div>
+                          <div class="accordion-header-name">
+                            <div class="name-line"></div>
+                            <span class="font-bold">陈某某</span>
+                            <div class="name-line"></div>
+                          </div>
+                          <div class="accordion-header-integral font-normal"><span>积分：</span><span class="font-alert">298</span></div>
+                          <div class="accordion-header-sign clearfix">
+                            <ul>
+                              <li>
+                                <p>周一</p>
+                                <p>08.10</p>
+                              </li>
+                              <li>
+                                <p class="font-x mar5">签到</p>
+                              </li>
+                              <li>
+                                <p class="p-color font-large">15</p>
+                                <p>Days</p>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <ul class="small-block-grid-1">
+                          <li>
+                            <ul class="accordion" data-accordion="myAccordionGroup1">
+                              <li class="accordion-navigation"> <a href="#panel1" class="accordion-icon accordion-icon1"><span>我的首页</span></a> </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <ul class="accordion" data-accordion="myAccordionGroup2">
+                              <li class="accordion-navigation"> <a href="#panel2" class="accordion-icon accordion-icon2"><span>我的活动</span></a> </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <ul class="accordion" data-accordion="myAccordionGroup3">
+                              <li class="accordion-navigation"> <a href="#panel3" class="accordion-icon accordion-icon3"><span>我的志愿者</span><i class="fa fa-angle-down"></i><i class="fa fa-angle-right"></i></a>
+                                <div id="panel3" class="content"> <a>我的捐赠</a> <a>我的义卖</a> <a>我的志愿者活动</a> <a>我的达人</a> </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <ul class="accordion" data-accordion="myAccordionGroup4">
+                              <li class="accordion-navigation"> <a href="#panel4" class="accordion-icon accordion-icon4"><span>我的积分</span><i class="fa fa-angle-down"></i><i class="fa fa-angle-right"></i></a>
+                                <div id="panel4" class="content"> <a>积分应用</a> <a>兑换商品情况</a> </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <ul class="accordion" data-accordion="myAccordionGroup5">
+                              <li class="accordion-navigation"> <a href="#panel5" class="accordion-icon accordion-icon5"><span>我的账户</span><i class="fa fa-angle-down"></i><i class="fa fa-angle-right"></i></a>
+                                <div id="panel5" class="content"> <a>个人信息</a> <a>我的财物</a> </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <ul class="accordion" data-accordion="myAccordionGroup6">
+                              <li class="accordion-navigation"> <a href="#panel6" class="accordion-icon accordion-icon6"><span>12371咨询服务</span><i class="fa fa-angle-down"></i><i class="fa fa-angle-right"></i></a>
+                                <div id="panel6" class="content"> <a>问题受理情况</a> <a>我的评价</a> </div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="small-24 medium-24 large-19 columns small-padding-l0 medium-padding-l0 large-padding-l" id="frame_main_col2" data-equalizer-watch="">
+                  <div class="list-position" id="frame_position">
+                    <div id="data_list_addr" class="c-addr margin-t"> <a href="#" target="_self">XXXX</a>&frasl;<a href="#" target="_self">XXXX</a>&frasl;<a href="#" target="_self">XXXX</a> </div>
+                  </div>
+                  <div id="data_datatable">
+                    <div class="panel">
+                      <header class="panel-heading"> 模态窗口插件+人员选择插件 </header>
+                      <div class="panel-body">
+                      	<div class="pop-wraper">
+                            <div class="search"> <a href="#" class="Click-block"  data-reveal-id="reveal1"></a>
+                                <div class="search-class part-peo_selected clearfix" >
+                                  <ul id="peopleSelect">
+                                  </ul>
+                                  <div class="input-label">
+                                    <input type="text" id="search1" autocomplete="off">
+                                  </div>
+                                </div>
+                                <div class="suggestion">
+                                  <ul class="clearfix">
+                                  </ul>
+                                </div>
+                              </div>
+                       		 <!--弹出框-->
+            				<div id="reveal1" class="reveal-modal tiny really openModal pop-people" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                              <h3>人员选择1</h3>
+                                <div class="modal_wrap">
+                                  <div class="serc">
+                                    <input type="text" id="search3" class="searchinput" autocomplete="off"  placeholder="搜索用户" />
+                                    <div class="suggestion2">
+                                      <ul class="clearfix">
+                                        <li class="rd_1 curr"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张发送肯德基发阿斯蒂芬二</span></a></li>
+                                        <li class="rd_2"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张三</span></a></li>
+                                        <li class="rd_3"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张四</span></a></li>
+                                        <li class="rd_4"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张五发射点发送够</span></a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="large-7 large-push-5 columns">
+                                    	<div class="infs">
+                                            <span class="look-more hide-for-large right" title="展开">展开<i class="more-img"></i></span><span class="clear-all clear-all-btn right padding-r10" href="">全部清空</span><span class="font-gray">已邀请人员</span>
+                                        </div>
+                                    	<div class="right-list"> 
+                                            <ul class="clearfix"></ul>
+                                         </div>
+                                    </div>
+                                    <div class="large-5 large-pull-7 columns">
+                                    	<div class="infs1">
+                                    		<b class="add-all add-all-btn right hide">全部添加</b><span class="font-gray">按部门筛选</span>
+                                 		</div>
+                                    	<div class="peo-select" id="pid-2">
+                                            <ul style="zoom:1;" class="grid-ul">
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>一级配置</div>
+                                                <ul class="grid-1 rd endCss">
+                                                  <li class="rd_1"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张发送肯德基发阿斯蒂芬二</span></a></li>
+                                                  <li class="rd_2"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张发送阿斯蒂芬二</span></a></li>
+                                                  <li class="rd_3"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一三</span></a></li>
+                                                </ul>
+                                                <ul class="grid-1">
+                                                  <li class="rd_1"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张一</span></a></li>
+                                                  <li class="rd_2"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一二</span></a></li>
+                                                  <li class="rd_3"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一三</span></a></li>
+                                                </ul>
+                                              </li>
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>二级配置</div>
+                                                <ul class="grid-1">
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2 endCss">
+                                                      <li class="rd_4"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张五</span></a></li>
+                                                      <li class="rd_5"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张大的</span></a></li>
+                                                      <li class="rd_6"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张代发</span></a></li>
+                                                    </ul>
+                                                  </li>
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2 endCss">
+                                                      <li class="rd_4"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张5</span></a></li>
+                                                      <li class="rd_5"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张6</span></a></li>
+                                                      <li class="rd_6"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张7</span></a></li>
+                                                    </ul>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>三级配置</div>
+                                                <ul class="grid-1">
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2 ">
+                                                      <li>
+                                                        <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发部</div>
+                                                        <ul class="grid-3 endCss">
+                                                          <li class="rd_7"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张8</span></a></li>
+                                                          <li class="rd_8"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张9</span></a></li>
+                                                          <li class="rd_9"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张10</span></a></li>
+                                                        </ul>
+                                                      </li>
+                                                    </ul>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>四级配置</div>
+                                                <ul class="grid-1">
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2">
+                                                      <li>
+                                                        <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发部</div>
+                                                        <ul class="grid-3">
+                                                          <li>
+                                                            <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发小组</div>
+                                                            <ul class="grid-4 endCss">
+                                                              <li class="rd_10"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张11</span></a></li>
+                                                              <li class="rd_11"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张12</span></a></li>
+                                                              <li class="rd_12"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张13</span></a></li>
+                                                            </ul>
+                                                          </li>
+                                                        </ul>
+                                                      </li>
+                                                    </ul>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                    </div>	
+                                  </div>
+                                </div>
+                              <div class="row confirm">
+                                <div class="small-12 columns"> <a class="right button margin-r  sure" orgid = "peopleSelect">提交</a> <a class="close-reveal-modal right button secondary margin-r" aria-label="Close">取消</a> </div>
+                              </div>
+                              <a class="close-reveal-modal" aria-label="Close">&#215;</a> </div>
+                       </div>
+                        <div class="pop-wraper">
+                              <div class="search"> <a href="#" class="Click-block" id="#Click-2"  data-reveal-id="reveal2"></a>
+                                <div class="search-class part-peo_selected clearfix" >
+                                  <ul id="peopleSelect1">
+                                  </ul>
+                                  <div class="input-label">
+                                    <input type="text" id="search-1" autocomplete="off">
+                                  </div>
+                                </div>
+                                <div class="suggestion">
+                                  <ul class="clearfix">
+                                  </ul>
+                                </div>
+                              </div>
+                       		 <!--弹出框-->
+            				<div id="reveal2" class="reveal-modal tiny really openModal pop-people" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                              <h3>人员选择</h3>
+                                <div class="modal_wrap">
+                                  <div class="serc">
+                                    <input type="text" id="search2" class="searchinput" autocomplete="off" placeholder="搜索用户" />
+                                    <div class="suggestion2">
+                                      <ul class="clearfix">
+                                        <li class="rd_1 curr"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张发送肯德基发阿斯蒂芬二</span></a></li>
+                                        <li class="rd_2"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张三</span></a></li>
+                                        <li class="rd_3"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张四</span></a></li>
+                                        <li class="rd_4"><a><i>添加</i><small>×</small><img src="images/2.png" alt="" /><span>张五发射点发送够</span></a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="large-7 large-push-5 columns">
+                                    	<div class="infs">
+                                            <span class="look-more hide-for-large right" title="展开">展开<i class="more-img"></i></span><span class="clear-all clear-all-btn right padding-r10" href="">全部清空</span><span class="font-gray">已邀请人员</span>
+                                        </div>
+                                    	<div class="right-list"> 
+                                    <ul class="clearfix"></ul>
+                                  </div>
+                                    </div>
+                                    <div class="large-5 large-pull-7 columns">
+                                    	<div class="infs1">
+                                    		<b class="add-all add-all-btn right hide">全部添加</b><span class="font-gray">按部门筛选</span>
+                                 		</div>
+                                    	<div class="peo-select" id="pid-1">
+                                            <ul style="zoom:1;" class="grid-ul">
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>一级配置</div>
+                                                <ul class="grid-1 rd endCss">
+                                                  <li class="rd_1"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张一</span></a></li>
+                                                  <li class="rd_2"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一二</span></a></li>
+                                                  <li class="rd_3"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一三</span></a></li>
+                                                </ul>
+                                                <ul class="grid-1">
+                                                  <li class="rd_1"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张一</span></a></li>
+                                                  <li class="rd_2"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一二</span></a></li>
+                                                  <li class="rd_3"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张一三</span></a></li>
+                                                </ul>
+                                              </li>
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>二级配置</div>
+                                                <ul class="grid-1">
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2 endCss">
+                                                      <li class="rd_4"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张五</span></a></li>
+                                                      <li class="rd_5"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张大的</span></a></li>
+                                                      <li class="rd_6"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张代发</span></a></li>
+                                                    </ul>
+                                                  </li>
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2 endCss">
+                                                      <li class="rd_4"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张5</span></a></li>
+                                                      <li class="rd_5"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张6</span></a></li>
+                                                      <li class="rd_6"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张7</span></a></li>
+                                                    </ul>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>三级配置</div>
+                                                <ul class="grid-1">
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2 ">
+                                                      <li>
+                                                        <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发部</div>
+                                                        <ul class="grid-3 endCss">
+                                                          <li class="rd_7"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张8</span></a></li>
+                                                          <li class="rd_8"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张9</span></a></li>
+                                                          <li class="rd_9"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张10</span></a></li>
+                                                        </ul>
+                                                      </li>
+                                                    </ul>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                              <li class="li-css grid-0">
+                                                <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>四级配置</div>
+                                                <ul class="grid-1">
+                                                  <li>
+                                                    <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发中心</div>
+                                                    <ul class="grid-2">
+                                                      <li>
+                                                        <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发部</div>
+                                                        <ul class="grid-3">
+                                                          <li>
+                                                            <div class="deploy"><a class="addCurall right">添加所有成员</a><i class="turn-right"></i>研发小组</div>
+                                                            <ul class="grid-4 endCss">
+                                                              <li class="rd_10"><a href="javascript:;" selectid="1"><i>添加</i><small>×</small><img src="images/1.png" alt=""/><span>张11</span></a></li>
+                                                              <li class="rd_11"><a href="javascript:;" selectid="2"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张12</span></a></li>
+                                                              <li class="rd_12"><a href="javascript:;" selectid="3"><i>添加</i><small>×</small><img src="images/2.png" alt=""/><span>张13</span></a></li>
+                                                            </ul>
+                                                          </li>
+                                                        </ul>
+                                                      </li>
+                                                    </ul>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                    </div>	
+                                  </div>
+                                </div>
+                              <div class="row confirm">
+                                <div class="small-12 columns"> <a class="right button margin-r  sure" orgid = "peopleSelect1">提交</a> <a class="close-reveal-modal right button secondary margin-r" aria-label="Close">取消</a> </div>
+                              </div>
+                              <a class="close-reveal-modal" aria-label="Close">&#215;</a> </div>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end main-->
+            
+            <div class="footer margin-t" id="frame_footer" role="contentinfo" include="include.html">
+              <div class="copyright" id="frame_footer_copyright">
+                <div class="rj-row" id="data_footer_copyright">
+                  <div class="small-24 medium-24 large-5 columns">&nbsp;</div>
+                  <div class="small-24 medium-24 large-13 columns small-padding-l0 medium-padding-l0 large-padding-l">
+                    <p class="footer-bar"> <span class="margin-r">联系我们</span> <span class="margin-r">站点地图</span> <span class="margin-r">使用帮助</span> <span class="margin-r">关于我们</span> <span class="margin-r">RSS订阅</span> <span class="margin-r">设为首页</span> <span class="margin-r">收藏本站</span> <br />
+                    </p>
+                    <p class="footer-copy">版权所有：海西活动党员e家</p>
+                  </div>
+                  <div class="small-24 medium-24 large-6 columns small-padding-l0 medium-padding-l0 large-padding-l">
+                    <div class="app-download">
+                      <p class="margin-b10 font-normal">APP手机下载</p>
+                      <img src="images/app-download.png" data-th-src="|${tempPath}images/app-download.png|" /> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end footer-->
+            
+            <div class="go" id="frame_go"><a title="返回顶部" class="gotop" id="goTop"></a> <a title="返回底部" class="gobottom" id="goBottom"></a></div>
+            <div id="frame_exit_off"><a class="exit-off-canvas"></a></div>
+            
+           
+            <!--确认删除警告-->
+            <div id="reveal2-2" class="reveal-modal tiny warning-panel" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+              <div class="row">
+                <div class="small-4 columns">
+                  <div class="row">
+                    <div class="small-12 columns"> <i class="fa font-warning fa-warning font-i"></i> </div>
+                  </div>
+                </div>
+                <div class="small-8 columns">
+                  <div class="row">
+                    <div class="small-12 columns"> 确定要删除吗？ </div>
+                  </div>
+                  <div class="row dele">
+                    <div class="small-12 columns"> <a class="right button">确定</a> <a class="close-reveal-modal right button secondary margin-r close_btn" aria-label="Close">取消</a> </div>
+                  </div>
+                </div>
+              </div>
+              <a class="close-reveal-modal" aria-label="Close">&#215;</a> </div>
+            <!--分享-->
+            <div id="reveal-share1-2" class="reveal-modal tiny openModal v_share" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+              <form data-abide="">
+                <h3>分享</h3>
+                <div class="row">
+                  <div class="small-12 columns">
+                    <div class="share-area">
+                      <ul class="small-block-grid-4 medium-block-grid-6 large-block-grid-6 ">
+                        <li><a href="# "><i class="share-icon weixin "></i><span>微信</span></a></li>
+                        <li><a href="# "><i class="share-icon yixin "></i><span>易信</span></a></li>
+                        <li><a href="# "><i class="share-icon sina "></i><span>新浪微博</span></a></li>
+                        <li><a href="# "><i class="share-icon qzone "></i><span>QQ空间</span></a></li>
+                        <li><a href="# "><i class="share-icon baidu "></i><span>百度贴吧</span></a></li>
+                        <li><a href="# "><i class="share-icon wangyi "></i><span>网易微博</span></a></li>
+                        <li><a href="# "><i class="share-icon renren "></i><span>人人网</span></a></li>
+                        <li><a href="# "><i class="share-icon tcweibo "></i><span>腾讯微博</span></a></li>
+                        <li><a href="# "><i class="share-icon qq "></i><span>QQ</span></a></li>
+                        <li><a href="# "><i class="share-icon souhu "></i><span>搜狐微博</span></a></li>
+                        <li><a href="# "><i class="share-icon kaixin "></i><span>开心网</span></a></li>
+                        <li><a href="# "><i class="share-icon reblog"></i><span>我的主页</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <a class="close-reveal-modal" aria-label="Close">&#215;</a> </div>
+          </div>
+        </div>
+        <div id="frame_javascript">
+          <div id="data_javascript"> 
+            <script data-th-src="|${tempPath}javascript/jquery-2.1.3.js|" src="javascript/jquery-2.1.3.js" type="text/javascript" charset="utf8"></script> 
+            <script data-th-src="|${tempPath}javascript/AppendAround.js|" src="javascript/AppendAround.js" type="text/javascript" charset="utf8"></script> 
+            <script data-th-src="|${tempPath}javascript/others.js|" src="javascript/others.js" type="text/javascript" charset="utf8"></script> 
+            <script data-th-src="|${tempPath}javascript/foundation.min.js|" src="javascript/foundation.min.js" type="text/javascript" charset="utf8"></script> 
+            <script data-th-src="|${tempPath}datatables-extend/js/foundation.extend.js|" src="datatables-extend/js/foundation.extend.js"></script> 
+            <!--人员选择插件JS文件--> 
+            <script data-th-src="|${tempPath}javascript/peopleselect.js|" src="javascript/peopleselect.js" type="text/javascript" charset="utf8"></script> 
+           <script data-th-src="|${tempPath}javascript/people.js|" src="javascript/people.js" type="text/javascript" charset="utf8"></script>
+          <script>
+             $(document).foundation();
+          </script> 
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
